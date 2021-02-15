@@ -31,7 +31,7 @@ def install(julia_download_path = 'https://julialang-s3.julialang.org/bin/linux/
         return    
     download_path = os.path.join(julia_target_path,'julia_install.tar.gz')
     print("Downloading Julia:")
-    wget.download(julia_download_path, download_path)
+    wget.download(julia_download_path, download_path,bar=None)
     print("\nExtracting...")
     tar = tarfile.open(download_path,"r:gz")
     tar.extractall(julia_target_path)
