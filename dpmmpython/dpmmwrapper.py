@@ -1,14 +1,19 @@
+from dpmmpython.install import get_julia_path_from_dir, install
+import os
+install()
+julia_target_path = os.path.join(os.path.expanduser("~"),'julia')
+_, partial_path = get_julia_path_from_dir(julia_target_path)
+os.environ["PATH"] += os.pathsep + partial_path
+
 import julia
 julia.Julia(compiled_modules=False)
 from dpmmpython.priors import niw, multinomial
 from julia import DPMMSubClusters
 import numpy as np
-import os
-from dpmmpython.install import get_julia_path_from_dir
 
-julia_target_path = os.path.join(os.path.expanduser("~"),'julia')
-_, partial_path = get_julia_path_from_dir(julia_target_path)
-os.environ["PATH"] += os.pathsep + partial_path
+
+
+
 
 
 class DPMMPython:
@@ -46,6 +51,8 @@ class DPMMPython:
             iterations= 100, verbose = False,
             burnout = 15, gt = None, outlier_weight = 0, outlier_params = None):
         """
+        Data should be DxN.
+        Burnout is the interval between cluster creation and the time it may start splitting, lower burnout will leader to faster convergence, but less stable results. 15 works great.
         Wrapper for DPMMSubClusters fit, reffer to "https://bgu-cs-vil.github.io/DPMMSubClusters.jl/stable/usage/" for specification
         Note that directly working with the returned clusters can be problematic software displaying the workspace (such as PyCharm debugger).
         :return: labels, clusters, sublabels

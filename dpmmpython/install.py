@@ -18,7 +18,6 @@ def get_julia_path_from_dir(base_dir):
     return os.path.join(julia_path,'bin','julia'),os.path.join(julia_path,'bin')
 
 
-
 def install(julia_download_path = 'https://julialang-s3.julialang.org/bin/linux/x64/1.5/julia-1.5.3-linux-x86_64.tar.gz', julia_target_path = None):
     '''
     :param julia_download_path: Path for the julia download, you can modify for your preferred version
@@ -27,7 +26,9 @@ def install(julia_download_path = 'https://julialang-s3.julialang.org/bin/linux/
     if julia_target_path == None:
         julia_target_path = os.path.join(os.path.expanduser("~"),'julia')
     if not os.path.isdir(julia_target_path):
-        os.mkdir(julia_target_path)    
+        os.mkdir(julia_target_path)
+    else:
+        return    
     download_path = os.path.join(julia_target_path,'julia_install.tar.gz')
     print("Downloading Julia:")
     wget.download(julia_download_path, download_path)
