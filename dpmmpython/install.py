@@ -26,7 +26,7 @@ def install(julia_download_path = 'https://julialang-s3.julialang.org/bin/linux/
     if julia_target_path == None:
         julia_target_path = os.path.join(os.path.expanduser("~"),'julia')
     if not os.path.isdir(julia_target_path):
-        os.makedirs(julia_target_path,exist_ok = True)
+        os.makedirs(julia_target_path)
     else:
         return    
     download_path = os.path.join(julia_target_path,'julia_install.tar.gz')
